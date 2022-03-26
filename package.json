@@ -20,6 +20,9 @@
     "vue",
     "design-system"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "jaskang",
   "license": "MIT",
   "homepage": "https://theme.jaskang.org",
