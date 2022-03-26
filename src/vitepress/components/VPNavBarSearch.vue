@@ -10,7 +10,8 @@ const VPAlgoliaSearchBox = defineAsyncComponent(() => import('./VPAlgoliaSearchB
 // payload), we delay initializing it until the user has actually clicked or
 // hit the hotkey to invoke it
 const loaded = ref(false);
-const metaKey = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl';
+const metaKey =
+  typeof navigator !== 'undefined' ? (/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl') : '';
 
 onMounted(() => {
   const handleSearchHotKey = (e: KeyboardEvent) => {
