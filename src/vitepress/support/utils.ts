@@ -55,3 +55,7 @@ export function isActive(currentPath: string, matchPath?: string, asRegex = fals
 export function normalize(path: string): string {
   return decodeURI(path).replace(hashRE, '').replace(extRE, '');
 }
+
+export function resolveBasePath(path: string, base: string = '/') {
+  return path.replace(base, '/');
+}

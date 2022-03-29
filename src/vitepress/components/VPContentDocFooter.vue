@@ -3,17 +3,17 @@ import { computed } from 'vue';
 import { useData } from 'vitepress';
 import { getSidebar } from '../support/sidebar';
 import { SidebarGroup } from '../config';
-import { isActive, normalizeLink } from '../support/utils';
+import { isActive, normalizeLink, resolveBasePath } from '../support/utils';
 import { VTIconChevronLeft, VTIconChevronRight, MenuItemWithLink } from '../../core';
 
 const { page, theme, site } = useData();
 
-const relativePath = computed(() => page.value.relativePath.replace(site.value.base, ''));
-
 const links = computed(() => {
   const sidebar = getSidebar(theme.value.sidebar, page.value.relativePath);
   const candidates = getFlatSideBarLinks(sidebar);
-  const index = candidates.findIndex((link) => isActive(relativePath.value, link.link));
+  const index = candidates.findIndex((link) =>
+    isActive(page.value.relativePath, resolveBasePath(link.link, site.value.base))
+  );
   return {
     prev: candidates[index - 1],
     next: candidates[index + 1]

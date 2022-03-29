@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { MenuItemWithLink } from '../../core';
 import VPSidebarLink from './VPSidebarLink.vue';
-import { isActive } from '../support/utils';
+import { isActive, resolveBasePath } from '../support/utils';
 import { useData } from 'vitepress';
-import { computed } from 'vue';
 
 const props = defineProps<{
   text: string;
@@ -11,9 +10,9 @@ const props = defineProps<{
 }>();
 
 const { page, site } = useData();
-const relativePath = computed(() => page.value.relativePath.replace(site.value.base, ''));
+
 function hasActiveLink() {
-  return props.items.some((item) => isActive(relativePath.value, item.link));
+  return props.items.some((item) => isActive(page.value.relativePath, resolveBasePath(item.link, site.value.base)));
 }
 </script>
 
