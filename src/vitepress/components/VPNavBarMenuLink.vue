@@ -3,19 +3,22 @@ import { VTLink } from '../../core';
 import { useData } from 'vitepress';
 import { isActive } from '../support/utils';
 import { NavItemWithLink } from '../config';
+import { computed } from 'vue';
 
 defineProps<{
   item: NavItemWithLink;
 }>();
 
-const { page } = useData();
+const { page, site } = useData();
+
+const relativePath = computed(() => page.value.relativePath.replace(site.value.base, ''));
 </script>
 
 <template>
   <VTLink
     :class="{
       VPNavBarMenuLink: true,
-      active: isActive(page.relativePath, item.activeMatch || item.link, !!item.activeMatch)
+      active: isActive(relativePath, item.activeMatch || item.link, !!item.activeMatch)
     }"
     :href="item.link"
     :noIcon="true"

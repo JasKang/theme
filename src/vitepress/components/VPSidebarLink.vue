@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useData } from 'vitepress';
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import { MenuItemWithLink } from '../../core';
 import { isActive } from '../support/utils';
 
@@ -8,12 +8,13 @@ defineProps<{
   item: MenuItemWithLink;
 }>();
 
-const { page } = useData();
+const { page, site } = useData();
 const closeSideBar = inject('close-sidebar') as () => void;
+const relativePath = computed(() => page.value.relativePath.replace(site.value.base, ''));
 </script>
 
 <template>
-  <a :class="{ link: true, active: isActive(page.relativePath, item.link) }" :href="item.link" @click="closeSideBar">
+  <a :class="{ link: true, active: isActive(relativePath, item.link) }" :href="item.link" @click="closeSideBar">
     <p class="link-text">{{ item.text }}</p>
   </a>
 </template>

@@ -3,16 +3,17 @@ import { MenuItemWithLink } from '../../core';
 import VPSidebarLink from './VPSidebarLink.vue';
 import { isActive } from '../support/utils';
 import { useData } from 'vitepress';
+import { computed } from 'vue';
 
 const props = defineProps<{
   text: string;
   items: MenuItemWithLink[];
 }>();
 
-const { page } = useData();
+const { page, site } = useData();
+const relativePath = computed(() => page.value.relativePath.replace(site.value.base, ''));
 function hasActiveLink() {
-  const { relativePath } = page.value;
-  return props.items.some((item) => isActive(relativePath, item.link));
+  return props.items.some((item) => isActive(relativePath.value, item.link));
 }
 </script>
 
