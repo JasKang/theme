@@ -57,5 +57,8 @@ export function normalize(path: string): string {
 }
 
 export function resolveBasePath(path: string, base: string = '/') {
-  return path.replace(base, '/');
+  if (path) {
+    return path.replace(base, '/');
+  }
+  return path;
 }
