@@ -29,20 +29,20 @@ module.exports = async () => ({
         href: '/logo.svg'
       }
     ],
-    ...(process.env.NODE_ENV === 'production'
-      ? [
-          [
-            'link',
-            {
-              rel: 'preload',
-              href: '/assets/inter-latin.7b37fe23.woff2',
-              as: 'font',
-              type: 'font/woff2',
-              crossorigin: 'anonymous'
-            }
-          ]
-        ]
-      : []),
+    // ...(process.env.NODE_ENV === 'production'
+    //   ? [
+    //       [
+    //         'link',
+    //         {
+    //           rel: 'preload',
+    //           href: './assets/inter-latin.7b37fe23.woff2',
+    //           as: 'font',
+    //           type: 'font/woff2',
+    //           crossorigin: 'anonymous'
+    //         }
+    //       ]
+    //     ]
+    //   : []),
     [
       'script',
       {},
